@@ -36,7 +36,7 @@ public class PetTests : TestHelper
 
         // Act & Assert
         var ex = Assert.Throws<ApiException>(() => petApi.GetPetById(99));
-        Assert.That(ex.ErrorCode, Is.EqualTo(404));
+        Assert.That(ex!.ErrorCode, Is.EqualTo(404));
     }
 
     [Test]
@@ -59,7 +59,7 @@ public class PetTests : TestHelper
 
         // Assert
         Assert.That(result, Is.Not.Null);
-        Assert.That(result.Name, Is.EqualTo(petName));
+        Assert.That(result!.Name, Is.EqualTo(petName));
     }
 
     [Test]
@@ -81,10 +81,11 @@ public class PetTests : TestHelper
         var createdPet = results.Find(p => p.Name == petName);
 
         // Act - remove the pet
-        petApi.DeletePet(createdPet.Id);
+        Assert.That(createdPet, Is.Not.Null);
+        petApi.DeletePet(createdPet!.Id);
 
         // Assert - pet no longer exists
-        var ex = Assert.Throws<ApiException>(() => petApi.GetPetById(createdPet.Id));
-        Assert.That(ex.ErrorCode, Is.EqualTo(404));
+        var ex = Assert.Throws<ApiException>(() => petApi.GetPetById(createdPet!.Id));
+        Assert.That(ex!.ErrorCode, Is.EqualTo(404));
     }
 }
