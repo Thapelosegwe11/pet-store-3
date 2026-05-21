@@ -13,7 +13,7 @@ public class InventoryTests
     {
         var inventory = _storeApi.GetInventory();
 
-        Assert.That(inventory, Is.Not.Empty);
+        Assert.That(inventory.Count, Is.GreaterThan(0));
         Assert.That(inventory.ContainsKey("sold"), Is.True);
         Assert.That(inventory.ContainsKey("pending"), Is.True);
         Assert.That(inventory.ContainsKey("available"), Is.True);
