@@ -20,7 +20,7 @@ public class OrderTests
         var newPet = new Pet(
             name: petName,
             photoUrls: new List<string> { "http://example.com/photo1.jpg" }
-        );
+    );
         newPet.Status = Pet.StatusEnum.Available;
         petApi.AddPet(newPet);
 
